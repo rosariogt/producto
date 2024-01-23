@@ -16,3 +16,6 @@ class IProductoRepository (IRepository):
 
     def findAll(self):
         pass
+
+    def registrarPrecioProductoCondition(self):
+        pass

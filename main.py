@@ -48,7 +48,7 @@ def crear_grupo_producto(grupoProducto: GrupoProducto):
 def crear_proveedor(proveedor: Proveedor):
     proveedorService = services.obtenerProveedorServiceImpl()
     return proveedorService.registrarProveedor(proveedor)
-
+    
 @app.post("/fabricante")
 def crear_fabricante(fabricante: Fabricante):
     fabricanteService = services.obtenerFabricanteServiceImpl()

@@ -2,7 +2,7 @@ from edomainimpl.postgres.Pgconnection import Pgconnection
 
 from domain.repository.IProductoRepository import IProductoRepository
 from model.Producto import Producto, ProductoData
-
+from abc import ABC, abstractstaticmethod
 
 class ProductoRepositoryImpl(IProductoRepository):
 
@@ -41,3 +41,32 @@ class ProductoRepositoryImpl(IProductoRepository):
             productos.append(producto)
         cur.close()
         return productos
+
+    def registrarPrecioProductoCondition(self):
+        for registrarPrecioProductoCondition_Method_cls in RegistrarPrecioProductoCondition.__subclasses__():
+            if registrarPrecioProductoCondition_Method_cls.registrarPrecioProducto_condition(self.raw_data):
+                return registrarPrecioProductoCondition_Method_cls()
+
+class RegistrarPrecioProductoCondition(ABC):
+    @abstractstaticmethod
+    def registrarPrecioProducto_condition(self):
+        pass
+
+class PrecioBase(RegistrarPrecioProductoCondition):
+    @staticmethod
+    def registrarPrecioProducto_condition(raw_data):
+        return raw_data.get("type") == "precio_base"
+
+
+class PrecioMayor(RegistrarPrecioProductoCondition):
+    @staticmethod
+    def registrarPrecioProducto_condition(raw_data):
+        return raw_data.get("type") == "precio_mayor"
+
+
+class PrecioMenor(RegistrarPrecioProductoCondition):
+    @staticmethod
+    def registrarPrecioProducto_condition(raw_data):
+        return raw_data.get("type") == "precio_menor"
+    
+    
