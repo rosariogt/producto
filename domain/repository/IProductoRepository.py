@@ -2,7 +2,7 @@ from edomain.repository.IRepository import IRepository
 
 from model import Producto
 
-
+### Principio: Single Responsability
 class IProductoRepository (IRepository):
 
     def insert(self, entity: Producto):

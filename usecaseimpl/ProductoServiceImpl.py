@@ -1,3 +1,5 @@
+from typing import List
+
 from eusecase.impl.ResponseObject import ResponseObject
 from eusecaseimpl.UsecaseImpl import UsecaseImpl
 
@@ -15,7 +17,8 @@ class ProductoServiceImpl(IProductoService, UsecaseImpl):
 
     def registrarProducto(self, producto: Producto):
         producto = self.repository.insert(producto)
-        print("-------------------")
         response = ResponseObject(object=producto, transaction=True, messages=[])
         return response
 
+    def registrarGrupoProducto(self, productos: List[Producto]):
+        pass
